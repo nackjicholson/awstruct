@@ -1,0 +1,33 @@
+{
+  "name": "awstruct",
+  "version": "0.0.0",
+  "description": "Infrastructure as code framework for AWS and Node.js",
+  "main": "lib/awstruct.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/nackjicholson/awstruct.git"
+  },
+  "keywords": [
+    "aws",
+    "infrastructure",
+    "amazon",
+    "web",
+    "services",
+    "promises",
+    "aws-promises",
+    "framework",
+    "resources",
+    "existence",
+    "aws-existence",
+    "deployment"
+  ],
+  "author": "Will Vaughn <willieviseoae@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/nackjicholson/awstruct/issues"
+  },
+  "homepage": "https://github.com/nackjicholson/awstruct"
+}
