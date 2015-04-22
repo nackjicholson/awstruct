@@ -1,2 +1,2 @@
 #awstruct
-Infrastructure as code framework for AWS and Node.js
+AWS Infrastructure as code with Node.js
