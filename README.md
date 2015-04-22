@@ -1,2 +1,2 @@
 #awstruct
-AWS Infrastructure as code with Node.js
+AWS Infrastructure as Code with Node.js

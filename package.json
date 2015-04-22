@@ -1,7 +1,7 @@
 {
   "name": "awstruct",
   "version": "0.0.0",
-  "description": "AWS Infrastructure as code with Node.js",
+  "description": "AWS Infrastructure as Code with Node.js",
   "main": "lib/awstruct.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
