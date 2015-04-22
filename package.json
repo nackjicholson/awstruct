@@ -29,5 +29,9 @@
   "bugs": {
     "url": "https://github.com/nackjicholson/awstruct/issues"
   },
-  "homepage": "https://github.com/nackjicholson/awstruct"
+  "homepage": "https://github.com/nackjicholson/awstruct",
+  "dependencies": {
+    "aws-existence": "git://github.com/nackjicholson/aws-existence",
+    "aws-promised": "^2.2.0"
+  }
 }
