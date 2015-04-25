@@ -5,7 +5,6 @@ var util = require('util')
 var awsPromised = require('aws-promised')
 var awsExistence = require('aws-existence')
 var awstructUtil = require('./util')
-var resource = require('./resource');
 var resourceManager = require('./resourceManager')
 
 /**
@@ -21,6 +20,7 @@ var resourceManager = require('./resourceManager')
  *  ex: (*|exports),
  *  getResourceKey: Function,
  *  getResourceName: Function,
+ *  resource: Function,
  *  resourceManager: (*|exports)
  *  sdk: exports,
  *  util: (*|exports)
@@ -96,7 +96,30 @@ module.exports = {
    *
    * @return {function} resource factory function.
    */
-  resource: resource,
+  resource: function(baseState, methodsFactory) {
+    /**
+     * Resource factory function. Instantiates new resource objects. Optional
+     * "last-minute" instance state properties can be provided to extend or
+     * override methods and properties of the resource.
+     *
+     * @param {object}
+     *
+     * @return {object} Resource object.
+     */
+    return function (instanceState) {
+      var state = _.assign({}, baseState, instanceState)
+
+      var attributes = _.assign(state, {
+        fullyQualifiedName: this.getResourceName(state.name),
+        key: this.getResourceKey(state.name),
+        type: state.type
+      })
+
+      var methods = methodsFactory(this, attributes)
+
+      return _.assign(attributes, methods)
+    }.bind(this);
+  },
 
   /**
    * Resource manager factory function.
