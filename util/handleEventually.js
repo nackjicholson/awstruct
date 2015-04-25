@@ -75,7 +75,7 @@ function handleEventually (fn, options, context) {
    * goGetData()
    *  .then(handleEventually(doSomethingWithData))
    *
-   * The doSomethingWithData function expects a signature of (data).
+   * The wrapped function expects a signature of (data).
    * fn.bind.apply and the argument trickery below ensures all calls to it will
    * have that argument.
    */

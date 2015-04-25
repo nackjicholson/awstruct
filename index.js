@@ -5,6 +5,7 @@ var util = require('util')
 var awsPromised = require('aws-promised')
 var awsExistence = require('aws-existence')
 var awstructUtil = require('./util')
+var resource = require('./resource');
 var resourceManager = require('./resourceManager')
 
 /**
@@ -83,6 +84,19 @@ module.exports = {
     var region = _.camelCase(this.region)
     return util.format('%s-%s-%s', this.system, region, terminalName)
   },
+
+  /**
+   * Resource closure. This function returns a factory function which can be
+   * used to instantiate a new resource object. You pass a hash of properties
+   * and a methodsFactory function to create "up" and "down" methods. The
+   * properties and methods are mixed into the final resource object.
+   *
+   * @param {object} baseState
+   * @param {function} methodsFactory
+   *
+   * @return {function} resource factory function.
+   */
+  resource: resource,
 
   /**
    * Resource manager factory function.
