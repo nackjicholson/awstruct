@@ -5,7 +5,7 @@ var util = require('util')
 var awsPromised = require('aws-promised')
 var awsExistence = require('aws-existence')
 var awstructUtil = require('./util')
-var resourceManager = require('./resourceManager')
+var resourceManager = require('./lib/resourceManager')
 
 /**
  * awstruct module
@@ -115,7 +115,7 @@ module.exports = {
         type: state.type
       })
 
-      var methods = methodsFactory(this, attributes)
+      var methods = methodsFactory(attributes)
 
       return _.assign(attributes, methods)
     }.bind(this);
