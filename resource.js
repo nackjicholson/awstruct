@@ -1,7 +1,7 @@
 'use strict'
 
 var _ = require('lodash')
-var awstruct = require('./index')
+var awstruct = require('./index.js')
 
 /**
  * Resource closure. This function returns a factory function which can be
