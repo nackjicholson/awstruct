@@ -32,6 +32,19 @@
   "homepage": "https://github.com/nackjicholson/awstruct",
   "dependencies": {
     "aws-existence": "git://github.com/nackjicholson/aws-existence",
-    "aws-promised": "git://github.com/nackjicholson/aws-promised"
+    "aws-promised": "git://github.com/nackjicholson/aws-promised",
+    "babel": "^5.2.6"
+  },
+  "devDependencies": {
+    "gulp": "^3.8.11",
+    "gulp-babel": "^5.1.0",
+    "gulp-istanbul": "^0.8.1",
+    "gulp-jshint": "^1.10.0",
+    "gulp-mocha": "^2.0.1",
+    "gulp-plumber": "^1.0.0",
+    "isparta": "^3.0.3",
+    "jshint-stylish": "^1.0.1",
+    "mocha": "^2.2.4",
+    "require-dir": "^0.3.0"
   }
 }
