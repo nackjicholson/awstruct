@@ -10,6 +10,5 @@ gulp.task('watch', function() {
     '**/.jshintrc'
   ];
 
-  gulp.watch(testFiles, ['test']);
-  gulp.watch(['es6/**/*'], ['transpile']);
+  gulp.watch(['es6/**/*'], ['test', 'transpile']);
 });

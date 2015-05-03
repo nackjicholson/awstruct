@@ -1,32 +1,13 @@
-'use strict'
+require('babel/polyfill');
+import {camelCase} from 'lodash';
+import ex from 'aws-existence';
+import sdk from 'aws-promised';
+import requireDir from 'require-directory';
+import resourceManager from './lib/resourceManager';
 
-var _ = require('lodash')
-var util = require('util')
-var awsPromised = require('aws-promised')
-var awsExistence = require('aws-existence')
-var awstructUtil = require('./util')
-var resourceManager = require('./lib/resourceManager')
+let util = requireDir('./util');
 
-/**
- * awstruct module
- *
- * @type {{
- *  config: {
- *    region: undefined,
- *    system: undefined
- *  },
- *  region, region,
- *  system, system,
- *  ex: (*|exports),
- *  getResourceKey: Function,
- *  getResourceName: Function,
- *  resource: Function,
- *  resourceManager: (*|exports)
- *  sdk: exports,
- *  util: (*|exports)
- * }}
- */
-module.exports = {
+export default {
   /**
    * awstruct config
    */
@@ -39,28 +20,28 @@ module.exports = {
    * Accessor methods for region.
    */
   get region () {
-    return this.config.region
+    return this.config.region;
   },
 
   set region (region) {
-    this.config.region = region
+    this.config.region = region;
   },
 
   /**
    * Accessor method for system.
    */
   get system () {
-    return this.config.system
+    return this.config.system;
   },
 
   set system (system) {
-    this.config.system = system
+    this.config.system = system;
   },
 
   /**
    * Utility for checking existence of aws resources, provided by aws-existence
    */
-  ex: awsExistence,
+  ex,
 
   /**
    * Composes a camel case key for the resource, using the fully
@@ -69,8 +50,8 @@ module.exports = {
    * @param terminalName The terminal name of the resource.
    * @returns {string} A camelized key for the resource.
    */
-  getResourceKey: function (terminalName) {
-    return _.camelCase(this.getResourceName(terminalName))
+  getResourceKey(terminalName) {
+    return camelCase(this.getResourceName(terminalName));
   },
 
   /**
@@ -80,9 +61,11 @@ module.exports = {
    * @param terminalName The terminal name of the resource.
    * @returns {string} The fully qualified resource name.
    */
-  getResourceName: function (terminalName) {
-    var region = _.camelCase(this.region)
-    return util.format('%s-%s-%s', this.system, region, terminalName)
+  getResourceName(terminalName) {
+    let system = camelCase(this.system);
+    let region = camelCase(this.region);
+    terminalName = camelCase(terminalName);
+    return `${system}-${region}-${terminalName}`;
   },
 
   /**
@@ -96,7 +79,7 @@ module.exports = {
    *
    * @return {function} resource factory function.
    */
-  resource: function(baseState, methodsFactory) {
+  resource(baseState, methodsFactory) {
     /**
      * Resource factory function. Instantiates new resource objects. Optional
      * "last-minute" instance state properties can be provided to extend or
@@ -106,33 +89,32 @@ module.exports = {
      *
      * @return {object} Resource object.
      */
-    return function (instanceState) {
-      var state = _.assign({}, baseState, instanceState)
+    return (instanceState) => {
+      let state = Object.assign({}, baseState, instanceState);
 
-      var attributes = _.assign(state, {
+      let attributes = Object.assign(state, {
         fullyQualifiedName: this.getResourceName(state.name),
-        key: this.getResourceKey(state.name),
-        type: state.type
-      })
+        key: this.getResourceKey(state.name)
+      });
 
-      var methods = methodsFactory(attributes)
+      let methods = methodsFactory(attributes);
 
-      return _.assign(attributes, methods)
-    }.bind(this);
+      return Object.assign(attributes, methods);
+    };
   },
 
   /**
    * Resource manager factory function.
    */
-  resourceManager: resourceManager,
+  resourceManager,
 
   /**
    * The promisified aws-sdk, provided aws-promised module.
    */
-  sdk: awsPromised,
+  sdk,
 
   /**
    * awstruct utilities
    */
-  util: awstructUtil
-}
+  util
+};

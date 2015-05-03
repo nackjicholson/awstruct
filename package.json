@@ -2,9 +2,9 @@
   "name": "awstruct",
   "version": "0.0.0",
   "description": "AWS Infrastructure as Code with Node.js",
-  "main": "index.js",
+  "main": "es5/awstruct.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "./node_modules/.bin/gulp coverage"
   },
   "repository": {
     "type": "git",
@@ -33,7 +33,8 @@
   "dependencies": {
     "aws-existence": "git://github.com/nackjicholson/aws-existence",
     "aws-promised": "git://github.com/nackjicholson/aws-promised",
-    "babel": "^5.2.6"
+    "babel": "^5.2.6",
+    "require-dir": "^0.3.0"
   },
   "devDependencies": {
     "gulp": "^3.8.11",
@@ -45,7 +46,6 @@
     "gulp-plumber": "^1.0.0",
     "isparta": "^3.0.3",
     "jshint-stylish": "^1.0.1",
-    "mocha": "^2.2.4",
-    "require-dir": "^0.3.0"
+    "mocha": "^2.2.4"
   }
 }
