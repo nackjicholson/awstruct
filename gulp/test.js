@@ -12,7 +12,7 @@ function test() {
 gulp.task('coverage', ['lint-es6', 'lint-es6-test'], function(done) {
   require('babel/register')({ modules: 'common' });
   gulp
-    .src(['es6/**/*.js'])
+    .src(['es6/**/*.js', '!es6/test/**'])
     .pipe(istanbul({ instrumenter: isparta.Instrumenter }))
     .pipe(istanbul.hookRequire())
     .on('finish', function() {

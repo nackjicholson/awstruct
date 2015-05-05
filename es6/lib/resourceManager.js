@@ -1,41 +1,51 @@
 import Bluebird from 'bluebird';
-import chalk from 'chalk';
 
-function resourceManager(componentList) {
+function loadReporter(reporterType) {
+  let reporter;
+
+  try {
+    reporter = require(`./reporters/${reporterType}`);
+  } catch (err) {
+    console.warn(`"${reporterType}" reporter not found or threw error\n`);
+    console.warn(err.stack);
+
+    throw new Error(`invalid reporter ${reporterType}`);
+  }
+
+  return reporter;
+}
+
+function resourceManager(resourceList=[], reporterType='console') {
   let results = {};
+  let reporter = loadReporter(reporterType);
 
   function down() {
     return Bluebird
-      .resolve(componentList)
+      .resolve(resourceList)
       .each(resourceDown);
   }
 
-  function resourceDown(component) {
-    return component
+  function resourceDown(resource) {
+    return resource
       .down()
       .then(function handleResponse(response) {
-        storeResults(component.key, response);
-        reportStatus(component, 'Down', 'magenta');
+        storeResults(resource.key, response);
+        reporter(resource, 'Down', { style: 'magenta' });
       });
-
-  }
-
-  function getResults() {
-    return results;
   }
 
   function up() {
     return Bluebird
-      .resolve(componentList)
+      .resolve(resourceList)
       .each(resourceUp);
   }
 
-  function resourceUp(component) {
-    return component
+  function resourceUp(resource) {
+    return resource
       .up()
       .then(function handleResponse(response) {
-        storeResults(component.key, response);
-        reportStatus(component, 'Up', 'cyan');
+        storeResults(resource.key, response);
+        reporter(resource, 'Up', {style: 'cyan'});
       });
   }
 
@@ -43,15 +53,13 @@ function resourceManager(componentList) {
     results[key] = value;
   }
 
-  function reportStatus(component, status, style) {
-    let componentName = component.fullyQualifiedName;
-    let stylishStatus = chalk[style](status);
-    console.log(`${stylishStatus}: ${componentName}`);
-  }
-
   return {
     down,
-    getResults,
+
+    get results() {
+      return results;
+    },
+
     up
   };
 }

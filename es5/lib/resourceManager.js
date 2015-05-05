@@ -10,36 +10,47 @@ var _Bluebird = require('bluebird');
 
 var _Bluebird2 = _interopRequireDefault(_Bluebird);
 
-var _chalk = require('chalk');
+function loadReporter(reporterType) {
+  var reporter = undefined;
 
-var _chalk2 = _interopRequireDefault(_chalk);
+  try {
+    reporter = require('./reporters/' + reporterType);
+  } catch (err) {
+    console.warn('"' + reporterType + '" reporter not found or threw error\n');
+    console.warn(err.stack);
 
-function resourceManager(componentList) {
-  var results = {};
-
-  function down() {
-    return _Bluebird2['default'].resolve(componentList).each(resourceDown);
+    throw new Error('invalid reporter ' + reporterType);
   }
 
-  function resourceDown(component) {
-    return component.down().then(function handleResponse(response) {
-      storeResults(component.key, response);
-      reportStatus(component, 'Down', 'magenta');
+  return reporter;
+}
+
+function resourceManager() {
+  var resourceList = arguments[0] === undefined ? [] : arguments[0];
+  var reporterType = arguments[1] === undefined ? 'console' : arguments[1];
+
+  var results = {};
+  var reporter = loadReporter(reporterType);
+
+  function down() {
+    return _Bluebird2['default'].resolve(resourceList).each(resourceDown);
+  }
+
+  function resourceDown(resource) {
+    return resource.down().then(function handleResponse(response) {
+      storeResults(resource.key, response);
+      reporter(resource, 'Down', { style: 'magenta' });
     });
   }
 
-  function getResults() {
-    return results;
-  }
-
   function up() {
-    return _Bluebird2['default'].resolve(componentList).each(resourceUp);
+    return _Bluebird2['default'].resolve(resourceList).each(resourceUp);
   }
 
-  function resourceUp(component) {
-    return component.up().then(function handleResponse(response) {
-      storeResults(component.key, response);
-      reportStatus(component, 'Up', 'cyan');
+  function resourceUp(resource) {
+    return resource.up().then(function handleResponse(response) {
+      storeResults(resource.key, response);
+      reporter(resource, 'Up', { style: 'cyan' });
     });
   }
 
@@ -47,17 +58,19 @@ function resourceManager(componentList) {
     results[key] = value;
   }
 
-  function reportStatus(component, status, style) {
-    var componentName = component.fullyQualifiedName;
-    var stylishStatus = _chalk2['default'][style](status);
-    console.log('' + stylishStatus + ': ' + componentName);
-  }
-
-  return {
+  return Object.defineProperties({
     down: down,
-    getResults: getResults,
+
     up: up
-  };
+  }, {
+    results: {
+      get: function () {
+        return results;
+      },
+      configurable: true,
+      enumerable: true
+    }
+  });
 }
 
 exports['default'] = resourceManager;

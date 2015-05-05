@@ -13,9 +13,13 @@
   "keywords": [
     "aws",
     "infrastructure",
+    "code",
+    "Infrastructure as Code",
+    "aws-sdk",
     "amazon",
     "web",
     "services",
+    "Amazon Web Services",
     "promises",
     "aws-promises",
     "framework",
@@ -34,6 +38,8 @@
     "aws-existence": "git://github.com/nackjicholson/aws-existence",
     "aws-promised": "git://github.com/nackjicholson/aws-promised",
     "babel": "^5.2.6",
+    "bluebird": "^2.9.25",
+    "chalk": "^1.0.0",
     "require-dir": "^0.3.0"
   },
   "devDependencies": {
@@ -46,6 +52,7 @@
     "gulp-plumber": "^1.0.0",
     "isparta": "^3.0.3",
     "jshint-stylish": "^1.0.1",
-    "mocha": "^2.2.4"
+    "mocha": "^2.2.4",
+    "sinon": "^1.14.1"
   }
 }

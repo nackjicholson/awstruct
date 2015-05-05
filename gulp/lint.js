@@ -2,7 +2,6 @@
 
 var gulp = require('gulp');
 var plumber = require('gulp-plumber');
-var jscs = require('gulp-jscs');
 var jshint = require('gulp-jshint');
 
 function createLintTask(taskName, files) {
@@ -11,7 +10,6 @@ function createLintTask(taskName, files) {
       .pipe(plumber())
       .pipe(jshint())
       .pipe(jshint.reporter('jshint-stylish'))
-      .pipe(jscs())
       .pipe(jshint.reporter('fail'));
   });
 }
