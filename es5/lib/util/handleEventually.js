@@ -65,7 +65,7 @@ function handleEventually(fn) {
 
     // Resolve non-promise and promise returns of fn()
     // Retry on any caught errors.
-    return _Bluebird2['default'].resolve(fn()).error(retry);
+    return _Bluebird2['default'].resolve(fn())['catch'](retry);
   }
 
   /**

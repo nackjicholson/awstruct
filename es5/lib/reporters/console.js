@@ -6,8 +6,6 @@ Object.defineProperty(exports, '__esModule', {
 
 var _interopRequireDefault = function (obj) { return obj && obj.__esModule ? obj : { 'default': obj }; };
 
-exports['default'] = consoleReporter;
-
 var _chalk = require('chalk');
 
 var _chalk2 = _interopRequireDefault(_chalk);
@@ -20,4 +18,5 @@ function consoleReporter(component, message, _ref) {
   console.log('' + stylishStatus + ': ' + componentName);
 }
 
+exports['default'] = consoleReporter;
 module.exports = exports['default'];

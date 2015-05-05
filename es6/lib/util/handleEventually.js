@@ -49,7 +49,7 @@ function handleEventually(fn, { maxRetries=30, ms=1000 } = {}, context = null) {
 
     // Resolve non-promise and promise returns of fn()
     // Retry on any caught errors.
-    return Bluebird.resolve(fn()).error(retry);
+    return Bluebird.resolve(fn()).catch(retry);
   }
 
   /**

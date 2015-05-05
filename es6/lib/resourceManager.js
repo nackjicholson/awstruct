@@ -4,6 +4,7 @@ function loadReporter(reporterType) {
   let reporter;
 
   try {
+    // TODO In full es6 may be able to use System.import()
     reporter = require(`./reporters/${reporterType}`);
   } catch (err) {
     console.warn(`"${reporterType}" reporter not found or threw error\n`);
@@ -19,12 +20,6 @@ function resourceManager(resourceList=[], reporterType='console') {
   let results = {};
   let reporter = loadReporter(reporterType);
 
-  function down() {
-    return Bluebird
-      .resolve(resourceList)
-      .each(resourceDown);
-  }
-
   function resourceDown(resource) {
     return resource
       .down()
@@ -32,12 +27,6 @@ function resourceManager(resourceList=[], reporterType='console') {
         storeResults(resource.key, response);
         reporter(resource, 'Down', { style: 'magenta' });
       });
-  }
-
-  function up() {
-    return Bluebird
-      .resolve(resourceList)
-      .each(resourceUp);
   }
 
   function resourceUp(resource) {
@@ -54,13 +43,21 @@ function resourceManager(resourceList=[], reporterType='console') {
   }
 
   return {
-    down,
+    down() {
+      return Bluebird
+        .resolve(resourceList)
+        .each(resourceDown);
+    },
 
     get results() {
       return results;
     },
 
-    up
+    up() {
+      return Bluebird
+        .resolve(resourceList)
+        .each(resourceUp);
+    }
   };
 }
 
