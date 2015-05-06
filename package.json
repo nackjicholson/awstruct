@@ -40,6 +40,7 @@
     "babel": "^5.2.6",
     "bluebird": "^2.9.25",
     "chalk": "^1.0.0",
+    "lodash": "^3.8.0",
     "require-dir": "^0.3.0"
   },
   "devDependencies": {

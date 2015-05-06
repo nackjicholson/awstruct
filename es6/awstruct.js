@@ -2,10 +2,10 @@ require('babel/polyfill');
 import {camelCase} from 'lodash';
 import ex from 'aws-existence';
 import sdk from 'aws-promised';
-import requireDir from 'require-directory';
+import requireDir from 'require-dir';
 import resourceManager from './lib/resourceManager';
 
-let util = requireDir('./util');
+let util = requireDir('./lib/util');
 
 export default {
   /**

@@ -16,7 +16,7 @@ var _sdk = require('aws-promised');
 
 var _sdk2 = _interopRequireDefault(_sdk);
 
-var _requireDir = require('require-directory');
+var _requireDir = require('require-dir');
 
 var _requireDir2 = _interopRequireDefault(_requireDir);
 
@@ -26,7 +26,7 @@ var _resourceManager2 = _interopRequireDefault(_resourceManager);
 
 require('babel/polyfill');
 
-var util = _requireDir2['default']('./util');
+var util = _requireDir2['default']('./lib/util');
 
 exports['default'] = Object.defineProperties({
   /**
