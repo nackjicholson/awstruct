@@ -1,6 +1,5 @@
 import assert from 'assert';
 import Bluebird from 'bluebird';
-//import sinon from 'sinon';
 import handleEventually from '../../lib/util/handleEventually';
 
 describe('lib/util/handleEventually', () => {

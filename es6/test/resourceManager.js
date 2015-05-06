@@ -71,8 +71,8 @@ describe('lib/resourceManager', () => {
           assert(resourceAlpha.down.calledOnce);
           assert(resourceBravo.down.calledOnce);
           assert.deepEqual(manager.results, {
-            'alpha': 'alpha.down',
-            'bravo': 'bravo.down'
+            alpha: 'alpha.down',
+            bravo: 'bravo.down'
           });
         })
         .done(done);
@@ -101,8 +101,8 @@ describe('lib/resourceManager', () => {
           assert(resourceAlpha.up.calledOnce);
           assert(resourceBravo.up.calledOnce);
           assert.deepEqual(manager.results, {
-            'alpha': 'alpha.up',
-            'bravo': 'bravo.up'
+            alpha: 'alpha.up',
+            bravo: 'bravo.up'
           });
         })
         .done(done);
