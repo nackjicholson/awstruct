@@ -5,6 +5,6 @@ var babel = require('gulp-babel');
 
 gulp.task('transpile', ['lint-es6'], function() {
   return gulp.src(['es6/**/*.js', '!es6/test/**'])
-    .pipe(babel())
+    .pipe(babel({optional: 'runtime'}))
     .pipe(gulp.dest('es5/'));
 });

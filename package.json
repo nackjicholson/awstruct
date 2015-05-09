@@ -37,13 +37,14 @@
   "dependencies": {
     "aws-existence": "git://github.com/nackjicholson/aws-existence",
     "aws-promised": "git://github.com/nackjicholson/aws-promised",
-    "babel": "^5.2.6",
+    "babel-runtime": "^5.2.17",
     "bluebird": "^2.9.25",
     "chalk": "^1.0.0",
     "lodash": "^3.8.0",
     "require-dir": "^0.3.0"
   },
   "devDependencies": {
+    "babel": "^5.2.17",
     "gulp": "^3.8.11",
     "gulp-babel": "^5.1.0",
     "gulp-istanbul": "^0.8.1",

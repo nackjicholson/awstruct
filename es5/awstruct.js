@@ -1,10 +1,16 @@
 'use strict';
 
-Object.defineProperty(exports, '__esModule', {
+var _Object$defineProperty = require('babel-runtime/core-js/object/define-property')['default'];
+
+var _Object$defineProperties = require('babel-runtime/core-js/object/define-properties')['default'];
+
+var _Object$assign = require('babel-runtime/core-js/object/assign')['default'];
+
+var _interopRequireDefault = require('babel-runtime/helpers/interop-require-default')['default'];
+
+_Object$defineProperty(exports, '__esModule', {
   value: true
 });
-
-var _interopRequireDefault = function (obj) { return obj && obj.__esModule ? obj : { 'default': obj }; };
 
 var _camelCase = require('lodash');
 
@@ -28,7 +34,7 @@ require('babel/polyfill');
 
 var util = _requireDir2['default']('./lib/util');
 
-exports['default'] = Object.defineProperties({
+exports['default'] = _Object$defineProperties({
   /**
    * awstruct config
    */
@@ -91,16 +97,16 @@ exports['default'] = Object.defineProperties({
      * @return {object} Resource object.
      */
     return function (instanceState) {
-      var state = Object.assign({}, baseState, instanceState);
+      var state = _Object$assign({}, baseState, instanceState);
 
-      var attributes = Object.assign(state, {
+      var attributes = _Object$assign(state, {
         fullyQualifiedName: _this.getResourceName(state.name),
         key: _this.getResourceKey(state.name)
       });
 
       var methods = methodsFactory(attributes);
 
-      return Object.assign(attributes, methods);
+      return _Object$assign(attributes, methods);
     };
   },
 

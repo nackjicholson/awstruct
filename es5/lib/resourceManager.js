@@ -1,10 +1,14 @@
 'use strict';
 
-Object.defineProperty(exports, '__esModule', {
+var _Object$defineProperty = require('babel-runtime/core-js/object/define-property')['default'];
+
+var _Object$defineProperties = require('babel-runtime/core-js/object/define-properties')['default'];
+
+var _interopRequireDefault = require('babel-runtime/helpers/interop-require-default')['default'];
+
+_Object$defineProperty(exports, '__esModule', {
   value: true
 });
-
-var _interopRequireDefault = function (obj) { return obj && obj.__esModule ? obj : { 'default': obj }; };
 
 var _Bluebird = require('bluebird');
 
@@ -51,7 +55,7 @@ function resourceManager() {
     results[key] = value;
   }
 
-  return Object.defineProperties({
+  return _Object$defineProperties({
     down: function down() {
       return _Bluebird2['default'].resolve(resourceList).each(resourceDown);
     },
