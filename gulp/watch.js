@@ -10,5 +10,9 @@ gulp.task('watch', function() {
     '**/.jshintrc'
   ];
 
+  gulp.watch(testFiles, ['test']);
+});
+
+gulp.task('watch-build', function() {
   gulp.watch(['es6/**/*'], ['test', 'transpile']);
 });
