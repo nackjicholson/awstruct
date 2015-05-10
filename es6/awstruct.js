@@ -1,4 +1,3 @@
-require('babel/polyfill');
 import {camelCase} from 'lodash';
 import ex from 'aws-existence';
 import sdk from 'aws-promised';

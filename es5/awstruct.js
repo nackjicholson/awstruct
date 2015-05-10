@@ -30,8 +30,6 @@ var _resourceManager = require('./lib/resourceManager');
 
 var _resourceManager2 = _interopRequireDefault(_resourceManager);
 
-require('babel/polyfill');
-
 var util = _requireDir2['default']('./lib/util');
 
 exports['default'] = _Object$defineProperties({
