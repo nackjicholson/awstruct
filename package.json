@@ -1,6 +1,6 @@
 {
   "name": "awstruct",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "AWS Infrastructure as Code with Node.js",
   "main": "es5/awstruct.js",
   "scripts": {
